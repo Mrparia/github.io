@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Suman Paria — Data Analyst with 7+ years in healthcare & pharmaceutical supply chains. Python, SQL, Tableau, Power BI." />
+  <title>Suman Paria | Data Analyst</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #0A0F1E;
+      --bg-card:   #131929;
+      --bg-card2:  #1A2340;
+      --text:      #F0F4FF;
+      --text-muted:#C8D6F5;
+      --accent:    #4F8EF7;
+      --teal:      #7DD3C0;
+      --border:    rgba(79,142,247,0.18);
+      --font-display: 'Space Grotesk', sans-serif;
+      --font-body:    'Inter', sans-serif;
+      --font-mono:    'JetBrains Mono', monospace;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 5vw;
+      height: 64px;
+      background: rgba(10,15,30,0.85);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-family: var(--font-display);
+      font-weight: 700; font-size: 1.15rem;
+      color: var(--text);
+      text-decoration: none;
+      letter-spacing: -0.02em;
+    }
+    .nav-logo span { color: var(--accent); }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      color: var(--text-muted); text-decoration: none;
+      font-size: 0.88rem; font-weight: 500; letter-spacing: 0.02em;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--accent); }
+    .nav-cta {
+      background: var(--accent); color: #fff !important;
+      padding: 0.4rem 1.1rem; border-radius: 6px;
+      font-weight: 600 !important;
+    }
+    .nav-cta:hover { background: #3a7ae0 !important; color: #fff !important; }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 80px 5vw 60px;
+      position: relative; overflow: hidden;
+    }
+    .hero-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      align-items: center; gap: 4rem;
+      max-width: 1200px; margin: 0 auto; width: 100%;
+    }
+    .hero-eyebrow {
+      font-family: var(--font-mono);
+      font-size: 0.8rem; color: var(--teal);
+      letter-spacing: 0.12em; text-transform: uppercase;
+      margin-bottom: 1.2rem;
+    }
+    .hero-name {
+      font-family: var(--font-display);
+      font-size: clamp(2.8rem, 5vw, 4.2rem);
+      font-weight: 700; line-height: 1.08;
+      letter-spacing: -0.03em;
+      margin-bottom: 0.4rem;
+    }
+    .hero-name .accent { color: var(--accent); }
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(1rem, 2vw, 1.3rem);
+      font-weight: 400; color: var(--text-muted);
+      margin-bottom: 1.6rem; line-height: 1.4;
+    }
+    .hero-desc {
+      color: var(--text-muted); font-size: 0.97rem;
+      max-width: 480px; margin-bottom: 2.4rem;
+    }
+    .hero-buttons { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.7rem 1.6rem; border-radius: 8px;
+      font-weight: 600; font-size: 0.9rem;
+      text-decoration: none; transition: all 0.2s;
+      cursor: pointer; border: none;
+    }
+    .btn-primary { background: var(--accent); color: #fff; }
+    .btn-primary:hover { background: #3a7ae0; transform: translateY(-1px); }
+    .btn-outline {
+      background: transparent; color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+
+    .hero-links { display: flex; gap: 1.2rem; margin-top: 2rem; }
+    .hero-links a {
+      color: var(--text-muted); text-decoration: none;
+      font-size: 0.82rem; font-family: var(--font-mono);
+      display: flex; align-items: center; gap: 0.4rem;
+      transition: color 0.2s;
+    }
+    .hero-links a:hover { color: var(--teal); }
+
+    /* ECG / pulse visual */
+    .hero-visual {
+      display: flex; align-items: center; justify-content: center;
+      position: relative;
+    }
+    .pulse-container {
+      width: 100%; max-width: 500px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px; padding: 2rem;
+      position: relative; overflow: hidden;
+    }
+    .pulse-label {
+      font-family: var(--font-mono); font-size: 0.72rem;
+      color: var(--teal); letter-spacing: 0.1em;
+      text-transform: uppercase; margin-bottom: 1rem;
+    }
+    .pulse-svg { width: 100%; height: 80px; }
+    .pulse-line {
+      fill: none; stroke: var(--teal); stroke-width: 2;
+      stroke-linecap: round; stroke-linejoin: round;
+    }
+    @keyframes dash {
+      from { stroke-dashoffset: 800; }
+      to   { stroke-dashoffset: 0; }
+    }
+    .pulse-line {
+      stroke-dasharray: 800;
+      stroke-dashoffset: 800;
+      animation: dash 2.5s ease-in-out forwards;
+    }
+    .stats-grid {
+      display: grid; grid-template-columns: 1fr 1fr 1fr;
+      gap: 1rem; margin-top: 1.5rem;
+    }
+    .stat-item { text-align: center; }
+    .stat-num {
+      font-family: var(--font-display);
+      font-size: 1.6rem; font-weight: 700;
+      color: var(--accent); display: block;
+    }
+    .stat-lbl {
+      font-size: 0.72rem; color: var(--text-muted);
+      font-family: var(--font-mono); letter-spacing: 0.05em;
+    }
+
+    /* domain pills on card */
+    .domain-pills { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 1.4rem; }
+    .pill {
+      font-family: var(--font-mono); font-size: 0.7rem;
+      padding: 0.3rem 0.7rem; border-radius: 100px;
+      border: 1px solid; letter-spacing: 0.04em;
+    }
+    .pill-blue  { color: var(--accent); border-color: rgba(79,142,247,0.4); background: rgba(79,142,247,0.08); }
+    .pill-teal  { color: var(--teal);   border-color: rgba(125,211,192,0.4); background: rgba(125,211,192,0.08); }
+    .pill-grey  { color: var(--text-muted); border-color: rgba(200,214,245,0.2); background: rgba(200,214,245,0.05); }
+
+    /* ── SECTIONS ── */
+    section { padding: 100px 5vw; }
+    .section-inner { max-width: 1100px; margin: 0 auto; }
+    .section-eyebrow {
+      font-family: var(--font-mono); font-size: 0.75rem;
+      color: var(--accent); letter-spacing: 0.14em;
+      text-transform: uppercase; margin-bottom: 0.8rem;
+    }
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 3vw, 2.4rem);
+      font-weight: 700; letter-spacing: -0.02em;
+      margin-bottom: 3rem; line-height: 1.2;
+    }
+    .section-title span { color: var(--accent); }
+    .divider {
+      width: 48px; height: 3px;
+      background: linear-gradient(90deg, var(--accent), var(--teal));
+      border-radius: 2px; margin-bottom: 2rem;
+    }
+
+    /* ── ABOUT ── */
+    #about { background: var(--bg-card); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .about-grid { display: grid; grid-template-columns: 3fr 2fr; gap: 4rem; align-items: start; }
+    .about-text p { color: var(--text-muted); margin-bottom: 1.2rem; font-size: 0.97rem; }
+    .about-text p strong { color: var(--text); }
+    .about-callout {
+      background: var(--bg-card2); border: 1px solid var(--border);
+      border-radius: 12px; padding: 1.8rem;
+    }
+    .about-callout h3 {
+      font-family: var(--font-display); font-weight: 600;
+      font-size: 1rem; margin-bottom: 1.2rem; color: var(--teal);
+    }
+    .callout-item {
+      display: flex; align-items: flex-start; gap: 0.8rem;
+      margin-bottom: 1rem; font-size: 0.88rem; color: var(--text-muted);
+    }
+    .callout-icon { color: var(--accent); margin-top: 2px; flex-shrink: 0; font-size: 1rem; }
+
+    /* ── SKILLS ── */
+    #skills {}
+    .skills-wrapper { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; }
+    .skill-card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 12px; padding: 1.6rem;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .skill-card:hover { border-color: var(--accent); transform: translateY(-3px); }
+    .skill-card-icon { font-size: 1.5rem; margin-bottom: 0.8rem; }
+    .skill-card h3 {
+      font-family: var(--font-display); font-size: 0.95rem;
+      font-weight: 600; margin-bottom: 1rem; color: var(--text);
+    }
+    .skill-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .skill-tag {
+      font-family: var(--font-mono); font-size: 0.7rem;
+      padding: 0.25rem 0.6rem; border-radius: 5px;
+      background: rgba(79,142,247,0.1); color: var(--accent);
+      border: 1px solid rgba(79,142,247,0.2);
+    }
+    .skill-tag.teal {
+      background: rgba(125,211,192,0.1); color: var(--teal);
+      border-color: rgba(125,211,192,0.2);
+    }
+
+    /* ── PROJECTS ── */
+    #projects { background: var(--bg-card); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.8rem; }
+    .project-card {
+      background: var(--bg); border: 1px solid var(--border);
+      border-radius: 14px; padding: 1.8rem;
+      display: flex; flex-direction: column;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .project-card:hover { border-color: var(--teal); transform: translateY(-4px); }
+    .project-tag {
+      font-family: var(--font-mono); font-size: 0.68rem;
+      color: var(--teal); letter-spacing: 0.1em;
+      text-transform: uppercase; margin-bottom: 0.8rem;
+    }
+    .project-card h3 {
+      font-family: var(--font-display); font-size: 1.05rem;
+      font-weight: 600; margin-bottom: 0.8rem; line-height: 1.3;
+    }
+    .project-card p {
+      color: var(--text-muted); font-size: 0.875rem;
+      flex: 1; margin-bottom: 1.4rem; line-height: 1.6;
+    }
+    .project-stack { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1.4rem; }
+    .project-footer { display: flex; gap: 1rem; margin-top: auto; }
+    .project-link {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.8rem; font-family: var(--font-mono);
+      color: var(--accent); text-decoration: none;
+      transition: color 0.2s;
+    }
+    .project-link:hover { color: var(--teal); }
+    .featured-badge {
+      display: inline-block;
+      font-family: var(--font-mono); font-size: 0.65rem;
+      padding: 0.2rem 0.55rem; border-radius: 4px;
+      background: rgba(79,142,247,0.15); color: var(--accent);
+      border: 1px solid rgba(79,142,247,0.3);
+      margin-left: 0.5rem; vertical-align: middle;
+      letter-spacing: 0.05em; text-transform: uppercase;
+    }
+
+    /* ── EXPERIENCE ── */
+    #experience {}
+    .timeline { position: relative; padding-left: 2rem; }
+    .timeline::before {
+      content: ''; position: absolute; left: 0; top: 8px; bottom: 8px;
+      width: 2px; background: linear-gradient(to bottom, var(--accent), var(--teal), transparent);
+      border-radius: 1px;
+    }
+    .timeline-item { position: relative; margin-bottom: 3rem; }
+    .timeline-dot {
+      position: absolute; left: -2.45rem; top: 6px;
+      width: 12px; height: 12px; border-radius: 50%;
+      background: var(--accent); border: 2px solid var(--bg);
+      box-shadow: 0 0 0 3px rgba(79,142,247,0.3);
+    }
+    .timeline-dot.teal { background: var(--teal); box-shadow: 0 0 0 3px rgba(125,211,192,0.3); }
+    .exp-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; margin-bottom: 0.3rem; flex-wrap: wrap; }
+    .exp-role {
+      font-family: var(--font-display); font-size: 1.05rem;
+      font-weight: 600;
+    }
+    .exp-date {
+      font-family: var(--font-mono); font-size: 0.75rem;
+      color: var(--accent); white-space: nowrap;
+      padding: 0.2rem 0.6rem; border-radius: 4px;
+      background: rgba(79,142,247,0.1); border: 1px solid rgba(79,142,247,0.2);
+    }
+    .exp-company { color: var(--teal); font-size: 0.9rem; margin-bottom: 0.9rem; font-weight: 500; }
+    .exp-bullets { list-style: none; }
+    .exp-bullets li {
+      position: relative; padding-left: 1.2rem;
+      color: var(--text-muted); font-size: 0.875rem;
+      margin-bottom: 0.5rem; line-height: 1.6;
+    }
+    .exp-bullets li::before {
+      content: '▸'; position: absolute; left: 0;
+      color: var(--accent); font-size: 0.75rem; top: 2px;
+    }
+
+    /* ── EDUCATION ── */
+    #education { background: var(--bg-card); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .edu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+    .edu-card {
+      background: var(--bg); border: 1px solid var(--border);
+      border-radius: 12px; padding: 1.6rem;
+      transition: border-color 0.2s;
+    }
+    .edu-card:hover { border-color: var(--teal); }
+    .edu-card .degree {
+      font-family: var(--font-display); font-size: 0.95rem;
+      font-weight: 600; margin-bottom: 0.4rem;
+    }
+    .edu-card .institution { color: var(--teal); font-size: 0.85rem; margin-bottom: 0.3rem; }
+    .edu-card .edu-year { font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted); }
+    .edu-card .edu-note { font-size: 0.82rem; color: var(--text-muted); margin-top: 0.8rem; line-height: 1.5; }
+
+    .certs-list { margin-top: 3rem; }
+    .certs-list h3 {
+      font-family: var(--font-display); font-size: 1.1rem;
+      font-weight: 600; margin-bottom: 1.2rem; color: var(--text);
+    }
+    .cert-item {
+      display: flex; align-items: center; gap: 1rem;
+      padding: 0.9rem 1.2rem; border-radius: 8px;
+      background: var(--bg); border: 1px solid var(--border);
+      margin-bottom: 0.7rem; font-size: 0.875rem; color: var(--text-muted);
+    }
+    .cert-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
+
+    /* ── CONTACT ── */
+    #contact { text-align: center; }
+    .contact-inner { max-width: 620px; margin: 0 auto; }
+    .contact-inner p { color: var(--text-muted); margin-bottom: 2.5rem; font-size: 0.97rem; }
+    .contact-links {
+      display: flex; justify-content: center; gap: 1.2rem; flex-wrap: wrap;
+      margin-top: 2rem;
+    }
+    .contact-link {
+      display: flex; align-items: center; gap: 0.5rem;
+      padding: 0.7rem 1.4rem; border-radius: 8px;
+      border: 1px solid var(--border); color: var(--text-muted);
+      text-decoration: none; font-size: 0.875rem;
+      font-family: var(--font-mono);
+      transition: all 0.2s;
+    }
+    .contact-link:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center; padding: 2rem 5vw;
+      border-top: 1px solid var(--border);
+      color: var(--text-muted); font-size: 0.8rem;
+      font-family: var(--font-mono);
+    }
+
+    /* ── SCROLL REVEAL ── */
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── MOBILE ── */
+    @media (max-width: 768px) {
+      .hero-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .hero-visual { order: -1; }
+      .stats-grid { grid-template-columns: 1fr 1fr 1fr; }
+      .about-grid { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+      section { padding: 70px 5vw; }
+      .exp-header { flex-direction: column; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .pulse-line { animation: none; stroke-dashoffset: 0; }
+      .reveal { opacity: 1; transform: none; transition: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#hero">Suman<span>.</span></a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#contact" class="nav-cta">Hire Me</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-grid">
+    <div class="hero-content">
+      <p class="hero-eyebrow">// Data Analyst · Kolkata, India</p>
+      <h1 class="hero-name">Suman<br><span class="accent">Paria</span></h1>
+      <p class="hero-title">Healthcare & Supply Chain<br>Domain Expert → Data Scientist</p>
+      <p class="hero-desc">
+        7+ years inside clinical and pharmaceutical operations — now channelling that depth through Python, SQL, Tableau, and Power BI. I don't just analyse healthcare data; I've lived the workflows that generate it.
+      </p>
+      <div class="hero-buttons">
+        <a href="#projects" class="btn btn-primary">View Projects ↓</a>
+        <a href="mailto:sumanparia9@gmail.com" class="btn btn-outline">Get In Touch</a>
+      </div>
+      <div class="hero-links">
+        <a href="https://github.com/Mrparia" target="_blank" rel="noopener">⌥ GitHub</a>
+        <a href="https://www.linkedin.com/in/sumanparia" target="_blank" rel="noopener">⌥ LinkedIn</a>
+        <a href="https://public.tableau.com/app/profile/suman.paria" target="_blank" rel="noopener">⌥ Tableau</a>
+        <a href="mailto:sumanparia9@gmail.com">⌥ Email</a>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <div class="pulse-container">
+        <p class="pulse-label">// data.pulse — live signal</p>
+        <svg class="pulse-svg" viewBox="0 0 460 80" xmlns="http://www.w3.org/2000/svg">
+          <polyline class="pulse-line"
+            points="0,40 40,40 50,40 60,10 70,70 80,40 100,40 120,40 135,40 145,5 155,75 165,40 185,40 210,40 225,40 235,18 245,62 255,40 270,40 300,40 315,40 325,8 335,72 345,40 360,40 400,40 420,40 460,40"
+          />
+        </svg>
+        <div class="stats-grid">
+          <div class="stat-item">
+            <span class="stat-num">7+</span>
+            <span class="stat-lbl">Years Ops</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-num">5</span>
+            <span class="stat-lbl">Projects</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-num">IIT</span>
+            <span class="stat-lbl">Kanpur PG</span>
+          </div>
+        </div>
+        <div class="domain-pills">
+          <span class="pill pill-teal">Healthcare</span>
+          <span class="pill pill-blue">Supply Chain</span>
+          <span class="pill pill-grey">Pharma</span>
+          <span class="pill pill-blue">ML / AI</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-inner">
+    <p class="section-eyebrow">01 · About</p>
+    <h2 class="section-title">From the <span>inside</span> out</h2>
+    <div class="about-grid">
+      <div class="about-text reveal">
+        <p>
+          Most data analysts learn a domain <strong>from data</strong>. I started from inside the operation — as a practising pharmacist and supply chain manager across five healthcare institutions in India.
+        </p>
+        <p>
+          I know which KPIs get gamed, which stockouts are preventable, and which clinical workflows break down under pressure — because I was the one fixing them. That context shapes every analysis I build.
+        </p>
+        <p>
+          After completing a <strong>Post Graduate Diploma in Data Analysis, AI & ML from IIT Kanpur</strong>, I've been translating that operational depth into Python-driven analytics, predictive modelling, and executive dashboards that actually get acted upon.
+        </p>
+        <p>
+          Currently working as a <strong>Pharmacist – Data & Operations</strong> at Dr. Agarwal's Eye Hospital, Kolkata — combining 100% dispensing accuracy with data-led stock management and anomaly detection.
+        </p>
+      </div>
+      <div class="about-callout reveal">
+        <h3>What I bring to the table</h3>
+        <div class="callout-item">
+          <span class="callout-icon">◈</span>
+          <span>Operational context that makes analyses actionable, not just insightful</span>
+        </div>
+        <div class="callout-item">
+          <span class="callout-icon">◈</span>
+          <span>End-to-end project delivery — from raw data to stakeholder-ready dashboards</span>
+        </div>
+        <div class="callout-item">
+          <span class="callout-icon">◈</span>
+          <span>Full-stack HMIS application built with TypeScript, React & Gemini AI</span>
+        </div>
+        <div class="callout-item">
+          <span class="callout-icon">◈</span>
+          <span>Proven track record cutting procurement costs 15–25% through data-led scheduling</span>
+        </div>
+        <div class="callout-item">
+          <span class="callout-icon">◈</span>
+          <span>Clear communicator — translating statistical patterns for non-technical reviewers</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-inner">
+    <p class="section-eyebrow">02 · Skills</p>
+    <h2 class="section-title">Technical <span>arsenal</span></h2>
+    <div class="skills-wrapper">
+      <div class="skill-card reveal">
+        <div class="skill-card-icon">🐍</div>
+        <h3>Languages & Libraries</h3>
+        <div class="skill-tags">
+          <span class="skill-tag">Python</span>
+          <span class="skill-tag">Pandas</span>
+          <span class="skill-tag">NumPy</span>
+          <span class="skill-tag">Scikit-learn</span>
+          <span class="skill-tag">Matplotlib</span>
+          <span class="skill-tag">Seaborn</span>
+          <span class="skill-tag">SQL</span>
+        </div>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-card-icon">📊</div>
+        <h3>Visualisation & BI</h3>
+        <div class="skill-tags">
+          <span class="skill-tag">Tableau</span>
+          <span class="skill-tag">Power BI</span>
+          <span class="skill-tag">Excel Dashboards</span>
+          <span class="skill-tag">Interactive Charts</span>
+        </div>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-card-icon">🧠</div>
+        <h3>Analytics & ML</h3>
+        <div class="skill-tags">
+          <span class="skill-tag">EDA</span>
+          <span class="skill-tag">Regression</span>
+          <span class="skill-tag">Clustering</span>
+          <span class="skill-tag">Demand Forecasting</span>
+          <span class="skill-tag">Risk Modelling</span>
+          <span class="skill-tag">KPI Monitoring</span>
+        </div>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-card-icon">💻</div>
+        <h3>Development</h3>
+        <div class="skill-tags">
+          <span class="skill-tag">TypeScript</span>
+          <span class="skill-tag">React</span>
+          <span class="skill-tag teal">Gemini AI</span>
+          <span class="skill-tag">Jupyter</span>
+          <span class="skill-tag">Git / GitHub</span>
+          <span class="skill-tag">Vite</span>
+        </div>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-card-icon">🏥</div>
+        <h3>Domain Expertise</h3>
+        <div class="skill-tags">
+          <span class="skill-tag teal">Healthcare Ops</span>
+          <span class="skill-tag teal">Pharma Supply Chain</span>
+          <span class="skill-tag teal">Inventory Management</span>
+          <span class="skill-tag teal">Clinical Workflows</span>
+        </div>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-card-icon">⚙️</div>
+        <h3>Operations & SCM</h3>
+        <div class="skill-tags">
+          <span class="skill-tag">Fill Rate Analysis</span>
+          <span class="skill-tag">Lead Time Mgmt</span>
+          <span class="skill-tag">Vendor Negotiation</span>
+          <span class="skill-tag">Procurement</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-inner">
+    <p class="section-eyebrow">03 · Projects</p>
+    <h2 class="section-title">What I've <span>built</span></h2>
+    <div class="projects-grid">
+
+      <div class="project-card reveal">
+        <p class="project-tag">Full-Stack · AI-Powered <span class="featured-badge">Featured</span></p>
+        <h3>Hospital Management Information System (HMIS)</h3>
+        <p>A full-stack HMIS web application with Google Gemini AI integrated for clinical decision-support prompts. Modular architecture with context-based state management for patient records, pharmaceutical inventory, and operational KPIs.</p>
+        <div class="project-stack">
+          <span class="skill-tag">TypeScript</span>
+          <span class="skill-tag">React</span>
+          <span class="skill-tag teal">Gemini AI</span>
+          <span class="skill-tag">Vite</span>
+        </div>
+        <div class="project-footer">
+          <a class="project-link" href="https://github.com/Mrparia" target="_blank" rel="noopener">↗ GitHub</a>
+        </div>
+      </div>
+
+      <div class="project-card reveal">
+        <p class="project-tag">Healthcare Analytics</p>
+        <h3>Heart Attack Risk Factor Analysis</h3>
+        <p>Multivariate EDA on a clinical dataset isolating key physiological and lifestyle predictors of cardiac risk. Correlation heatmaps and Tableau dashboards contrasting diseased vs. healthy patients, structured for triage prioritisation.</p>
+        <div class="project-stack">
+          <span class="skill-tag">Python</span>
+          <span class="skill-tag">Pandas</span>
+          <span class="skill-tag">Seaborn</span>
+          <span class="skill-tag">Tableau</span>
+        </div>
+        <div class="project-footer">
+          <a class="project-link" href="https://github.com/Mrparia" target="_blank" rel="noopener">↗ GitHub</a>
+        </div>
+      </div>
+
+      <div class="project-card reveal">
+        <p class="project-tag">Financial Risk Modelling</p>
+        <h3>Vehicle Loan Defaulter Risk Analysis</h3>
+        <p>Identified which demographic, financial, and behavioural features most reliably predict loan default from 30+ variables. Feature engineering segmented borrowers into risk tiers. Interactive Tableau dashboard for credit teams.</p>
+        <div class="project-stack">
+          <span class="skill-tag">Python</span>
+          <span class="skill-tag">Scikit-learn</span>
+          <span class="skill-tag">Tableau</span>
+        </div>
+        <div class="project-footer">
+          <a class="project-link" href="https://github.com/Mrparia" target="_blank" rel="noopener">↗ GitHub</a>
+        </div>
+      </div>
+
+      <div class="project-card reveal">
+        <p class="project-tag">Recommendation System</p>
+        <h3>Restaurant Rating & Recommendation System</h3>
+        <p>Weighted scoring matrix across cuisine quality, pricing, service, and location dimensions to rank restaurants and surface non-obvious top performers. Score breakdowns visualised in Tableau for transparent decision-making.</p>
+        <div class="project-stack">
+          <span class="skill-tag">Python</span>
+          <span class="skill-tag">Data Modelling</span>
+          <span class="skill-tag">Tableau</span>
+        </div>
+        <div class="project-footer">
+          <a class="project-link" href="https://github.com/Mrparia" target="_blank" rel="noopener">↗ GitHub</a>
+        </div>
+      </div>
+
+      <div class="project-card reveal">
+        <p class="project-tag">Business Intelligence</p>
+        <h3>E-Commerce Sales Dashboard</h3>
+        <p>Dynamic Excel dashboard tracking regional sales performance, category-level revenue trends, and month-on-month growth. Separated raw transaction data from the reporting layer for zero-friction monthly updates.</p>
+        <div class="project-stack">
+          <span class="skill-tag">Excel</span>
+          <span class="skill-tag">Advanced Analytics</span>
+          <span class="skill-tag">Dashboard Design</span>
+        </div>
+        <div class="project-footer">
+          <a class="project-link" href="https://github.com/Mrparia" target="_blank" rel="noopener">↗ GitHub</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-inner">
+    <p class="section-eyebrow">04 · Experience</p>
+    <h2 class="section-title">7+ years in the <span>field</span></h2>
+    <div class="timeline">
+
+      <div class="timeline-item reveal">
+        <div class="timeline-dot"></div>
+        <div class="exp-header">
+          <span class="exp-role">Pharmacist – Data & Operations</span>
+          <span class="exp-date">Aug 2023 – Present</span>
+        </div>
+        <p class="exp-company">Dr. Agarwal's Eye Hospital, Kolkata</p>
+        <ul class="exp-bullets">
+          <li>Maintained 100% dispensing accuracy while tracking stock consumption data across a multi-unit hospital facility to anticipate replenishment needs.</li>
+          <li>Mapped drug usage patterns against prescription volume to flag anomalies early — catching expiry risk before write-off and reducing wastage through targeted stock rotation.</li>
+          <li>Coordinated directly with surgeons, ophthalmologists, and ward staff on supply sequencing, ensuring critical post-operative medications were in-unit before scheduled procedures.</li>
+        </ul>
+      </div>
+
+      <div class="timeline-item reveal">
+        <div class="timeline-dot teal"></div>
+        <div class="exp-header">
+          <span class="exp-role">Assistant Manager – Supply Chain Management</span>
+          <span class="exp-date">Apr 2023 – Aug 2023</span>
+        </div>
+        <p class="exp-company">Hexamed Diagnostics & Specialty Clinics, Jammu</p>
+        <ul class="exp-bullets">
+          <li>Built demand forecasting models and inventory control systems that cut stockout frequency and reduced excess buffer stock — measured against weekly fill rate, lead time, and inventory turnover targets.</li>
+          <li>Tracked SCM KPIs against weekly targets, using trend deviations to trigger procurement adjustments before shortages materialised.</li>
+          <li>Renegotiated vendor terms across key diagnostic reagent suppliers, consolidating order volumes to secure better unit pricing while cutting lead time.</li>
+        </ul>
+      </div>
+
+      <div class="timeline-item reveal">
+        <div class="timeline-dot"></div>
+        <div class="exp-header">
+          <span class="exp-role">Pharmacy Manager</span>
+          <span class="exp-date">Oct 2021 – Mar 2023</span>
+        </div>
+        <p class="exp-company">Ex-Servicemen Contributory Health Scheme (ECHS), Kolkata</p>
+        <ul class="exp-bullets">
+          <li>Managed pharmaceutical inventory and procurement for a government health scheme serving thousands of defence beneficiaries monthly across multiple therapeutic categories.</li>
+          <li>Restructured procurement scheduling around actual consumption data rather than fixed calendar cycles — cutting emergency spot-purchases that carried a price premium of 15–25% over contracted rates.</li>
+        </ul>
+      </div>
+
+      <div class="timeline-item reveal">
+        <div class="timeline-dot teal"></div>
+        <div class="exp-header">
+          <span class="exp-role">Hospital Pharmacist</span>
+          <span class="exp-date">Jan 2021 – Oct 2021</span>
+        </div>
+        <p class="exp-company">Centre for Sight, Kolkata</p>
+        <ul class="exp-bullets">
+          <li>Managed pharmaceutical dispensing, stock control, and regulatory compliance within a specialist ophthalmology hospital — maintaining zero dispensing errors.</li>
+          <li>Identified recurring gaps between surgeon preference cards and stocked inventory, prompting a formulary review that reduced last-minute substitutions during surgical sessions.</li>
+        </ul>
+      </div>
+
+      <div class="timeline-item reveal">
+        <div class="timeline-dot"></div>
+        <div class="exp-header">
+          <span class="exp-role">Pharmacist</span>
+          <span class="exp-date">Aug 2017 – Sep 2020</span>
+        </div>
+        <p class="exp-company">Flipkart Health Plus, Kolkata</p>
+        <ul class="exp-bullets">
+          <li>Processed large daily prescription volumes on a digital health platform, maintaining 100% dispensing accuracy while managing real-time stock queries and substitution decisions.</li>
+          <li>Tracked order fulfilment patterns to flag recurring out-of-stock SKUs to the procurement team — reducing customer reorder failures on high-demand chronic medication lines.</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="section-inner">
+    <p class="section-eyebrow">05 · Education</p>
+    <h2 class="section-title">Academic <span>foundation</span></h2>
+    <div class="edu-grid">
+      <div class="edu-card reveal">
+        <p class="degree">Post Graduate Diploma – Data Analysis, AI & ML</p>
+        <p class="institution">🏛 Indian Institute of Technology (IIT) Kanpur</p>
+        <p class="edu-year">Sep 2022 – Apr 2023</p>
+        <p class="edu-note">Coursework in ML algorithms, Statistical Analysis, and Data Processing — applied across capstone projects in healthcare risk and financial default prediction.</p>
+      </div>
+      <div class="edu-card reveal">
+        <p class="degree">B.Sc. – Chemistry, Zoology & Botany</p>
+        <p class="institution">🏛 University of Calcutta, Kolkata</p>
+        <p class="edu-year">Aug 2018 – Sep 2021</p>
+      </div>
+      <div class="edu-card reveal">
+        <p class="degree">Diploma in Pharmacy</p>
+        <p class="institution">🏛 Institute of Pharmacy, Jalpaiguri</p>
+        <p class="edu-year">Aug 2014 – Sep 2016</p>
+      </div>
+    </div>
+
+    <div class="certs-list reveal">
+      <h3>Certifications & Training</h3>
+      <div class="cert-item"><div class="cert-dot"></div>Professional Certificate in Data Analytics — Purdue University (via Simplilearn)</div>
+      <div class="cert-item"><div class="cert-dot"></div>Power BI Workshop — Data Visualisation & Dashboard Design</div>
+      <div class="cert-item"><div class="cert-dot"></div>AI Tools Workshop — Applied AI for Business Analytics</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-inner">
+    <div class="contact-inner">
+      <p class="section-eyebrow" style="text-align:center">06 · Contact</p>
+      <h2 class="section-title" style="text-align:center">Let's <span>connect</span></h2>
+      <p>
+        Open to data analyst, business analyst, and healthcare analytics roles. If you're building something at the intersection of data and clinical or supply chain operations, I'd love to talk.
+      </p>
+      <a href="mailto:sumanparia9@gmail.com" class="btn btn-primary" style="margin: 0 auto; display:inline-flex;">
+        Send an Email ↗
+      </a>
+      <div class="contact-links">
+        <a class="contact-link" href="https://github.com/Mrparia" target="_blank" rel="noopener">⌥ GitHub</a>
+        <a class="contact-link" href="https://www.linkedin.com/in/sumanparia" target="_blank" rel="noopener">⌥ LinkedIn</a>
+        <a class="contact-link" href="https://public.tableau.com/app/profile/suman.paria" target="_blank" rel="noopener">⌥ Tableau Portfolio</a>
+        <a class="contact-link" href="tel:+917602078828">⌥ +91 76020 78828</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2025 Suman Paria · Kolkata, India · Built with HTML, CSS & intention</p>
+</footer>
+
+<script>
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(el => {
+      if (el.isIntersecting) {
+        el.target.classList.add('visible');
+        observer.unobserve(el.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // Replay pulse on scroll into view
+  const pulseEl = document.querySelector('.pulse-line');
+  const heroObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        pulseEl.style.animation = 'none';
+        pulseEl.offsetHeight;
+        pulseEl.style.animation = '';
+      }
+    });
+  }, { threshold: 0.5 });
+  heroObs.observe(document.getElementById('hero'));
+</script>
+</body>
+</html>
